@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://botacrx36dy0y"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_6qt24"]
+[ext_resource type="Texture2D" uid="uid://bi6k422ikvlc8" path="res://assets/flappy-bird-assets-master/sprites/bluebird-midflap.png" id="1_orq7a"]
+[ext_resource type="Texture2D" uid="uid://ngyt7biws15p" path="res://assets/flappy-bird-assets-master/sprites/bluebird-downflap.png" id="2_p1lid"]
+[ext_resource type="Texture2D" uid="uid://dns78k2iswmcx" path="res://assets/flappy-bird-assets-master/sprites/bluebird-upflap.png" id="3_nq5lg"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qabyn"]
+radius = 12.5
+height = 34.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jthvj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_orq7a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_p1lid")
+}],
+"loop": true,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_orq7a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_nq5lg")
+}],
+"loop": true,
+"name": &"up",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D"]
+scale = Vector2(1.5, 1.5)
+motion_mode = 1
+script = ExtResource("1_6qt24")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_qabyn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_jthvj")
+animation = &"down"
+autoplay = "up"
+frame_progress = 0.965127
+speed_scale = 3.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(100, 0)
+limit_top = 0
+limit_bottom = 0

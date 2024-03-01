@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://b8v0l1h07a68i"]
+
+[ext_resource type="Texture2D" uid="uid://3elyd1bfwg4d" path="res://assets/flappy-bird-assets-master/sprites/message.png" id="1_pxqnd"]
+[ext_resource type="Script" path="res://scripts/hud.gd" id="1_qs25k"]
+[ext_resource type="PackedScene" uid="uid://cs5w7er3hwiud" path="res://scenes/score_label.tscn" id="3_woxdf"]
+[ext_resource type="Texture2D" uid="uid://bj47b4dd606f0" path="res://assets/flappy-bird-assets-master/sprites/gameover.png" id="4_hy8td"]
+
+[node name="HUD" type="Node2D"]
+z_index = 2
+script = ExtResource("1_qs25k")
+
+[node name="WelcomeScreen" type="Sprite2D" parent="."]
+position = Vector2(145, 209)
+scale = Vector2(1.04348, 1.04348)
+texture = ExtResource("1_pxqnd")
+
+[node name="ScoreLabel" parent="." instance=ExtResource("3_woxdf")]
+visible = false
+offset_left = 144.0
+offset_top = 50.0
+offset_right = 144.0
+offset_bottom = 50.0
+
+[node name="Gameover" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(144, 137)
+texture = ExtResource("4_hy8td")

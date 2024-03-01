@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://cglqrqtc6jw2h"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_76he8"]
+[ext_resource type="PackedScene" uid="uid://bof8h8hkr8rdu" path="res://scenes/background.tscn" id="1_ds834"]
+[ext_resource type="PackedScene" uid="uid://botacrx36dy0y" path="res://scenes/player.tscn" id="2_ctidy"]
+[ext_resource type="PackedScene" uid="uid://bg6c2ugxhayo0" path="res://scenes/obstacle.tscn" id="3_kt1hg"]
+[ext_resource type="PackedScene" uid="uid://b8v0l1h07a68i" path="res://scenes/hud.tscn" id="6_yydqo"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_76he8")
+obstacle_scene = ExtResource("3_kt1hg")
+
+[node name="Background" parent="." instance=ExtResource("1_ds834")]
+
+[node name="Player" parent="." instance=ExtResource("2_ctidy")]
+position = Vector2(45, 256)
+
+[node name="HUD" parent="." instance=ExtResource("6_yydqo")]
+
+[node name="SpawnObstacleTimer" type="Timer" parent="."]
+wait_time = 1.5
+
+[connection signal="hit" from="Player" to="." method="_on_player_hit"]
+[connection signal="start_game" from="Player" to="." method="_on_player_start_game"]
+[connection signal="timeout" from="SpawnObstacleTimer" to="." method="_on_spawn_obstacle_timer_timeout"]

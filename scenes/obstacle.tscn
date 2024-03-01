@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=3 uid="uid://bg6c2ugxhayo0"]
+
+[ext_resource type="Texture2D" uid="uid://cwcomv7v5heyw" path="res://assets/flappy-bird-assets-master/sprites/pipe-green.png" id="1_26all"]
+[ext_resource type="Script" path="res://scripts/obstacle.gd" id="1_smb2g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iw34c"]
+size = Vector2(50, 94)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qo468"]
+size = Vector2(51, 318.75)
+
+[node name="Obstacle" type="Area2D" groups=["obstacle"]]
+script = ExtResource("1_smb2g")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(26, 370)
+shape = SubResource("RectangleShape2D_iw34c")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+metadata/_edit_group_ = true
+
+[node name="UpperCollision" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(25.5, 159.625)
+shape = SubResource("RectangleShape2D_qo468")
+
+[node name="Pipe-green" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(52, 320)
+rotation = 3.14159
+texture = ExtResource("1_26all")
+centered = false
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(0, 419)
+metadata/_edit_group_ = true
+
+[node name="LowerCollision" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(25.5, 159.75)
+shape = SubResource("RectangleShape2D_qo468")
+
+[node name="Pipe-green" type="Sprite2D" parent="StaticBody2D2"]
+texture = ExtResource("1_26all")
+centered = false
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(2, 1)
+scale = Vector2(2.4, 36.95)
+rect = Rect2(0, 0, 20, 20)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
